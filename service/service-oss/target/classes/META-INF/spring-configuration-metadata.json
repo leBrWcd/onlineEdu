@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "aliyun.oss.file",
+      "type": "com.lebrwcd.utils.ConstantYamlUtil",
+      "sourceType": "com.lebrwcd.utils.ConstantYamlUtil"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aliyun.oss.file.bucket-name",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.utils.ConstantYamlUtil"
+    },
+    {
+      "name": "aliyun.oss.file.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.utils.ConstantYamlUtil"
+    },
+    {
+      "name": "aliyun.oss.file.key-id",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.utils.ConstantYamlUtil"
+    },
+    {
+      "name": "aliyun.oss.file.key-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.utils.ConstantYamlUtil"
+    }
+  ],
+  "hints": []
+}

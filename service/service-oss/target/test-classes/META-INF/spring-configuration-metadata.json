@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "aliyun.oss.file",
+      "type": "test",
+      "sourceType": "test"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

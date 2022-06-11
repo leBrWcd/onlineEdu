@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "wx.open",
+      "type": "com.lebrwcd.ucenter.utils.ConstantWxUtils",
+      "sourceType": "com.lebrwcd.ucenter.utils.ConstantWxUtils"
+    }
+  ],
+  "properties": [
+    {
+      "name": "wx.open.app-id",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.ucenter.utils.ConstantWxUtils"
+    },
+    {
+      "name": "wx.open.app-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.ucenter.utils.ConstantWxUtils"
+    },
+    {
+      "name": "wx.open.redirect-url",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.ucenter.utils.ConstantWxUtils"
+    }
+  ],
+  "hints": []
+}

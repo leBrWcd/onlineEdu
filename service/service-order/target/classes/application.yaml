@@ -1,0 +1,48 @@
+# 服务端口
+server:
+  port: 8007
+#服务名称
+spring:
+  application:
+    name: service-order
+  #数据库链接
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/guli_db?serverTimezone=GMT%2B8
+    username: root
+    password: wcd0209
+#返回json的全局时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #nacos
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  #熔断机制
+feign:
+  hystrix:
+    enabled: true
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath:com/lebrwcd/eduorder/mapper/xml/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+#wx支付
+wx:
+  pay:
+    #关联的公众号appid
+    appid: wx74862e0dfcf69954
+    #商户号
+    partner: 1558950191
+    #商户key
+    partnerkey: T6m9iK73b0kn9g5v426MKfHQH7X8rKwb
+    #回调地址
+    notifyurl: http://guli.shop/api/order/weixinPay/weixinNotify
+
+

@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "wx.pay",
+      "type": "com.lebrwcd.eduorder.utils.YamlConstantUtil",
+      "sourceType": "com.lebrwcd.eduorder.utils.YamlConstantUtil"
+    }
+  ],
+  "properties": [
+    {
+      "name": "wx.pay.appid",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.eduorder.utils.YamlConstantUtil"
+    },
+    {
+      "name": "wx.pay.notifyurl",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.eduorder.utils.YamlConstantUtil"
+    },
+    {
+      "name": "wx.pay.partner",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.eduorder.utils.YamlConstantUtil"
+    },
+    {
+      "name": "wx.pay.partner-key",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.eduorder.utils.YamlConstantUtil"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "aliyun.vod.file",
+      "type": "com.lebrwcd.vod.utils.ConstantYamlUtil",
+      "sourceType": "com.lebrwcd.vod.utils.ConstantYamlUtil"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aliyun.vod.file.key-id",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.vod.utils.ConstantYamlUtil"
+    },
+    {
+      "name": "aliyun.vod.file.key-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.lebrwcd.vod.utils.ConstantYamlUtil"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,26 @@
+#服务端口
+server:
+  port: 8002
+
+
+spring:
+  application:
+    name: service-oss
+  profiles:
+    active: dev
+
+#阿里云oss
+
+#阿里云 OSS
+  #不同的服务器，地址不同
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-guangzhou.aliyuncs.com
+      keyid: LTAI5tPJWu5GMxLQtjm3Yqyf
+      keysecret: IEVkO9PG68juvqUHUhI3nURSmM6X8i
+      bucketname: lebrwcd-edu1010
