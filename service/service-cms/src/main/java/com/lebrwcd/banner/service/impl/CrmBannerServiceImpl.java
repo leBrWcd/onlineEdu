@@ -29,7 +29,7 @@ public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner
         //根据id降序排列
         wrapper.orderByDesc("id");
         //取出前两条数据
-        wrapper.last("limit 2");
+        wrapper.last("limit 4");
 
         List<CrmBanner> list = baseMapper.selectList(wrapper);
 

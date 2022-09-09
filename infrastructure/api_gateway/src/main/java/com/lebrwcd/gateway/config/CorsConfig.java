@@ -40,7 +40,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 import org.springframework.web.util.pattern.PathPatternParser;
 
 /**
- * description:
+ * description: 跨越配置
  *
  * @author wangpeng
  * @date 2019/01/02

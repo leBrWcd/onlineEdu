@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * ClassName R
- * Description TODO
+ * Description 前端统一返回信息
  *
  * @author lebr7wcd
  * @version 1.0

@@ -32,7 +32,7 @@ public class ScheduleTask {
     @Scheduled(cron = "0/5 * * * * ?")
     public void task1() {
 
-        System.out.println("*********++++++++++++*****执行了");
+        System.out.println("测试定时任务*********++++++++++++*****执行了");
 
     }
 

@@ -5,6 +5,10 @@ server:
 spring:
   application:
     name: service-cms
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
   #返回json的全局时间格式
   jackson:
     time-zone: GMT+8
