@@ -1,6 +1,7 @@
 package com.lebrwcd.acl.controller;
 
 
+import com.lebrwcd.acl.entity.Role;
 import com.lebrwcd.acl.entity.User;
 import com.lebrwcd.acl.service.RoleService;
 import com.lebrwcd.acl.service.UserService;
@@ -55,6 +56,13 @@ public class UserController {
 
         IPage<User> pageModel = userService.page(pageParam, wrapper);
         return R.ok().data("items", pageModel.getRecords()).data("total", pageModel.getTotal());
+    }
+
+    @ApiOperation(value = "获取用户")
+    @GetMapping("get/{id}")
+    public R get(@PathVariable String id) {
+        User user = userService.getById(id);
+        return R.ok().data("item", user);
     }
 
     @ApiOperation(value = "新增管理用户")
