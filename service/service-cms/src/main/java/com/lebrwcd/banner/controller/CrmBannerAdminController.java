@@ -1,8 +1,13 @@
 package com.lebrwcd.banner.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.banner.entity.CrmBanner;
+import com.lebrwcd.banner.model.dto.BannerQueryDTO;
 import com.lebrwcd.banner.service.CrmBannerService;
 import com.lebrwcd.commonutils.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +24,7 @@ import java.nio.file.Path;
  * @since 2022-05-11
  */
 @RestController
-@RequestMapping("/eduservice/banner")
+@RequestMapping("/educms/banner")
 public class CrmBannerAdminController {
 
 
@@ -28,13 +33,18 @@ public class CrmBannerAdminController {
 
     @GetMapping("/page/{current}/{limit}")
     public R page(@PathVariable("current") Long current,
-                  @PathVariable("limit") Long limit) {
-
+                  @PathVariable("limit") Long limit,
+                  @RequestBody BannerQueryDTO dto) {
 
         Page<CrmBanner> page = new Page<>(current,limit);
 
-        bannerService.page(page,null);
+        bannerService.pageQuery(page,dto);
 
+
+        //LambdaQueryWrapper<CrmBanner> queryWrapper = new LambdaQueryWrapper<>();
+        //queryWrapper.eq(CrmBanner::getIsDeleted,"0")
+        //        .orderByAsc(CrmBanner::getSort);
+        //IPage<CrmBanner> page1 = bannerService.page(page, queryWrapper);
 
         return R.ok().data("items",page.getRecords()).data("total",page.getTotal());
     }
@@ -66,8 +76,13 @@ public class CrmBannerAdminController {
 
     @DeleteMapping("{id}")
     public R delete(@PathVariable String id) {
-        bannerService.removeById(id);
-
+        //逻辑删除
+        // 先查询待删除的banner是否存在
+        CrmBanner banner = bannerService.getById(id);
+        if (banner != null) {
+            banner.setIsDeleted(true);
+            bannerService.updateById(banner);
+        }
         return R.ok();
     }
 

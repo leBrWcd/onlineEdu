@@ -81,7 +81,6 @@ public class EduTeacherController {
         //page方法返回的分页数据封装在 分页对象eduTeacherPage中
         eduTeacherService.pageQuery(eduTeacherPage,teacherQuery);
 
-
         //总记录数
         long total = eduTeacherPage.getTotal();
         //每页显示的记录

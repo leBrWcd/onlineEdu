@@ -1,7 +1,9 @@
 package com.lebrwcd.banner.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.banner.entity.CrmBanner;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lebrwcd.banner.model.dto.BannerQueryDTO;
 
 import java.util.List;
 
@@ -16,4 +18,6 @@ import java.util.List;
 public interface CrmBannerService extends IService<CrmBanner> {
 
     List<CrmBanner> queryBanner();
+
+    void pageQuery(Page<CrmBanner> page, BannerQueryDTO dto);
 }

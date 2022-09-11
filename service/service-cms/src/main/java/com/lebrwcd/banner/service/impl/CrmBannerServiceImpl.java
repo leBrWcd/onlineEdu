@@ -1,8 +1,10 @@
 package com.lebrwcd.banner.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.banner.entity.CrmBanner;
 import com.lebrwcd.banner.mapper.CrmBannerMapper;
+import com.lebrwcd.banner.model.dto.BannerQueryDTO;
 import com.lebrwcd.banner.service.CrmBannerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.cache.annotation.Cacheable;
@@ -34,6 +36,18 @@ public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner
         List<CrmBanner> list = baseMapper.selectList(wrapper);
 
         return list;
+
+    }
+
+    /**
+     * 条件查询
+     * @param page 分页对象
+     * @param dto 查询条件
+     */
+    @Override
+    public void pageQuery(Page<CrmBanner> page, BannerQueryDTO dto) {
+
+
 
     }
 }
