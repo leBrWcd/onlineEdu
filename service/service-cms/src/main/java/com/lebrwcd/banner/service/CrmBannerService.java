@@ -19,5 +19,5 @@ public interface CrmBannerService extends IService<CrmBanner> {
 
     List<CrmBanner> queryBanner();
 
-    void pageQuery(Page<CrmBanner> page, BannerQueryDTO dto);
+    Page<CrmBanner> pageQuery(Page<CrmBanner> objectPage, BannerQueryDTO dto);
 }

@@ -9,11 +9,11 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   #数据库链接
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.110.131:3306/online_edu?serverTimezone=GMT%2B8
-    username: root
-    password: root
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://192.168.110.131:3306/online_edu?serverTimezone=GMT%2B8
+#    username: root
+#    password: root
   #redis
   redis:
     host: 192.168.110.131

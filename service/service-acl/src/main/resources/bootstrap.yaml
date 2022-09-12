@@ -1,7 +1,7 @@
 #spring配置
 spring:
   application:
-    name: service-edu
+    name: service-acl
   cloud:
     nacos:
       config:

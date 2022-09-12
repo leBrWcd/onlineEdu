@@ -10,10 +10,16 @@ import com.lebrwcd.banner.entity.CrmBanner;
 import com.lebrwcd.banner.model.dto.BannerQueryDTO;
 import com.lebrwcd.banner.service.CrmBannerService;
 import com.lebrwcd.commonutils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
@@ -24,6 +30,8 @@ import java.nio.file.Path;
  * @since 2022-05-11
  */
 @RestController
+@RefreshScope
+@Slf4j
 @RequestMapping("/educms/banner")
 public class CrmBannerAdminController {
 
@@ -31,21 +39,20 @@ public class CrmBannerAdminController {
     @Autowired
     private CrmBannerService bannerService;
 
-    @GetMapping("/page/{current}/{limit}")
+    /**
+     * 条件分页查询
+     * @param current 当前页
+     * @param limit 每页显示条数
+     * @param dto 查询条件
+     * @return R
+     */
+    @PostMapping("/page/{current}/{limit}")
     public R page(@PathVariable("current") Long current,
                   @PathVariable("limit") Long limit,
-                  @RequestBody BannerQueryDTO dto) {
-
+                  @RequestBody(required = false) BannerQueryDTO dto) {
         Page<CrmBanner> page = new Page<>(current,limit);
-
-        bannerService.pageQuery(page,dto);
-
-
-        //LambdaQueryWrapper<CrmBanner> queryWrapper = new LambdaQueryWrapper<>();
-        //queryWrapper.eq(CrmBanner::getIsDeleted,"0")
-        //        .orderByAsc(CrmBanner::getSort);
-        //IPage<CrmBanner> page1 = bannerService.page(page, queryWrapper);
-
+        page = bannerService.pageQuery(page,dto);
+        log.info("日志：分页参数:{},{},total:{}" ,current,limit,page.getTotal());
         return R.ok().data("items",page.getRecords()).data("total",page.getTotal());
     }
 
@@ -61,13 +68,11 @@ public class CrmBannerAdminController {
     @GetMapping("{id}")
     public R getById(@PathVariable String id) {
         CrmBanner crmBanner = bannerService.getById(id);
-
         return R.ok().data("banner",crmBanner);
     }
 
     @PostMapping("update")
     public R update(@RequestBody CrmBanner crmBanner) {
-
         bannerService.updateById(crmBanner);
 
         return R.ok();

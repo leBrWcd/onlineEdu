@@ -2,6 +2,32 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lebrwcd.banner.mapper.CrmBannerMapper">
 
+    <!-- 返回结果集 -->
+    <resultMap id="result" type="com.lebrwcd.banner.entity.CrmBanner">
+        <id column="id" property="id"/>
+        <result column="title" property="title" />
+        <result column="image_url" property="imageUrl" />
+        <result column="link_url" property="linkUrl" />
+        <result column="sort" property="sort" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
 
-
+    <select id="pageQuery" resultMap="result">
+        select id,title,image_url,link_url,sort,gmt_create,gmt_modified
+        from crm_banner
+        where 1=1
+        <if test="map.title != null and map.title != ''">
+            and title like '%' #{map.title} '%'
+        </if>
+        <if test="map.gmtCreate != null">
+            and gmt_create = #{map.gmtCreate}
+        </if>
+        <if test="map.gmtModified != null">
+            and gmt_modified = #{map.gmtModified}
+        </if>
+        and is_deleted = 0
+        order by sort asc
+        limit #{num},#{size}
+    </select>
 </mapper>

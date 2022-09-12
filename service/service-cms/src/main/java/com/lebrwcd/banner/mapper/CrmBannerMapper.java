@@ -1,7 +1,12 @@
 package com.lebrwcd.banner.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.banner.entity.CrmBanner;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lebrwcd.banner.model.dto.BannerQueryDTO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +18,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CrmBannerMapper extends BaseMapper<CrmBanner> {
 
+    List<CrmBanner> pageQuery(@Param("num") Long num,
+                              @Param("size") Long size,
+                              @Param("map") BannerQueryDTO dto);
 }

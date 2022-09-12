@@ -7,6 +7,8 @@ import com.lebrwcd.banner.mapper.CrmBannerMapper;
 import com.lebrwcd.banner.model.dto.BannerQueryDTO;
 import com.lebrwcd.banner.service.CrmBannerService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,7 @@ import java.util.List;
 @Service
 public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner> implements CrmBannerService {
 
-    @Cacheable(key = "'bannerList'",value = "banner")  //redis缓存
+    @Cacheable(key = "'bannerList'", value = "banner")  //redis缓存
     @Override
     public List<CrmBanner> queryBanner() {
 
@@ -45,9 +47,19 @@ public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner
      * @param dto 查询条件
      */
     @Override
-    public void pageQuery(Page<CrmBanner> page, BannerQueryDTO dto) {
+    public Page<CrmBanner> pageQuery(Page<CrmBanner> page, BannerQueryDTO dto) {
+        Long num = (page.getCurrent() - 1) * page.getSize();
+        List<CrmBanner> crmBanners = baseMapper.pageQuery(num,page.getSize(),dto);
+        QueryWrapper<CrmBanner> wrapper = new QueryWrapper<>();
+        wrapper.eq("is_deleted",0);
+        Integer count = baseMapper.selectCount(wrapper);
 
-
-
+        if (crmBanners != null) {
+            page.setRecords(crmBanners);
+        }
+        if (count > 0) {
+            page.setTotal(count);
+        }
+        return page;
     }
 }
