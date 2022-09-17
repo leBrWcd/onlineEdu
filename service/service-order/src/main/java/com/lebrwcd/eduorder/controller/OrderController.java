@@ -2,13 +2,18 @@ package com.lebrwcd.eduorder.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.commonutils.R;
 import com.lebrwcd.eduorder.entity.Order;
+import com.lebrwcd.eduorder.model.dto.QueryDTO;
 import com.lebrwcd.eduorder.service.OrderService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -20,10 +25,31 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/eduorder/order")
+@RefreshScope
+@Slf4j
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    /**
+     * 分页条件查询
+     *
+     * @param current 当前页
+     * @param limit 每页展示几条记录
+     * @param dto 查询调条件
+     * @return R
+     */
+    @PostMapping("/page/{current}/{limit}")
+    public R pageOrderList(@PathVariable("current") Long current,
+                           @PathVariable("limit") Long limit,
+                           @RequestBody(required = false) QueryDTO dto) {
+
+        Page<Order> page = new Page<>(current,limit);
+        page = orderService.pageQuery(page,dto);
+        log.info("日志：分页参数:{},{},total:{}" ,current,limit,page.getTotal());
+        return R.ok().data("items",page.getRecords()).data("total",page.getTotal());
+    }
 
 
     /**
@@ -72,7 +98,19 @@ public class OrderController {
         }else{
             return false;
         }
+    }
 
+    @DeleteMapping("{id}")
+    public R removeById(@PathVariable("id") Long id) {
+
+        Order order = orderService.getById(id);
+        if (order == null) {
+            return R.error().message("数据不存在");
+        }
+        // 逻辑删除
+        order.setIsDeleted(true);
+        orderService.updateById(order);
+        return R.ok();
     }
 
 

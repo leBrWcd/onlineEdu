@@ -1,19 +1,26 @@
 package com.lebrwcd.eduorder.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.commonutils.JwtUtils;
+import com.lebrwcd.commonutils.R;
 import com.lebrwcd.commonutils.vo.CourseVo;
 import com.lebrwcd.commonutils.vo.UcenterMemberVo;
 import com.lebrwcd.eduorder.client.CourseClient;
 import com.lebrwcd.eduorder.client.UcenterClient;
 import com.lebrwcd.eduorder.entity.Order;
 import com.lebrwcd.eduorder.mapper.OrderMapper;
+import com.lebrwcd.eduorder.model.dto.QueryDTO;
 import com.lebrwcd.eduorder.service.OrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lebrwcd.eduorder.utils.OrderNoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * <p>
@@ -66,5 +73,41 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
         //返回订单id
         return order.getOrderNo();
+    }
+
+    /**
+     *  分页查询
+     * @param page 分页对象
+     * @param dto 查询条件
+     * @return Page<Order>
+     */
+    @Override
+    public Page<Order> pageQuery(Page<Order> page, QueryDTO dto) {
+
+        Long num = (page.getCurrent() - 1) * page.getSize();
+        List<Order> crmBanners = baseMapper.pageQuery(num,page.getSize(),dto);
+        QueryWrapper<Order> wrapper = new QueryWrapper<>();
+        if (dto.getOrderNo() != "") {
+            wrapper.like("order_no",dto.getOrderNo());
+        }
+        if (dto.getStatus() != null) {
+            wrapper.eq("status",dto.getStatus());
+        }
+        if (dto.getGmtCreate() != null) {
+            wrapper.eq("gmt_create",dto.getGmtCreate());
+        }
+        if (dto.getGmtModified() != null) {
+            wrapper.eq("gmt_modified",dto.getGmtModified());
+        }
+        wrapper.eq("is_deleted",0);
+        Integer count = baseMapper.selectCount(wrapper);
+
+        if (crmBanners != null) {
+            page.setRecords(crmBanners);
+        }
+        if (count > 0) {
+            page.setTotal(count);
+        }
+        return page;
     }
 }

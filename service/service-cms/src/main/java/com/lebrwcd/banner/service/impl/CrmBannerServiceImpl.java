@@ -50,6 +50,7 @@ public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner
     public Page<CrmBanner> pageQuery(Page<CrmBanner> page, BannerQueryDTO dto) {
         Long num = (page.getCurrent() - 1) * page.getSize();
         List<CrmBanner> crmBanners = baseMapper.pageQuery(num,page.getSize(),dto);
+        // 查询未删除的记录数
         QueryWrapper<CrmBanner> wrapper = new QueryWrapper<>();
         wrapper.eq("is_deleted",0);
         Integer count = baseMapper.selectCount(wrapper);

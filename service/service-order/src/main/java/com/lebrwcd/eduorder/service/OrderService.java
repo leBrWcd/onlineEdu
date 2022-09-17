@@ -1,7 +1,9 @@
 package com.lebrwcd.eduorder.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.eduorder.entity.Order;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lebrwcd.eduorder.model.dto.QueryDTO;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,4 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 public interface OrderService extends IService<Order> {
 
     String genericOrder(String courseId, HttpServletRequest request);
+
+    Page<Order> pageQuery(Page<Order> page, QueryDTO dto);
 }

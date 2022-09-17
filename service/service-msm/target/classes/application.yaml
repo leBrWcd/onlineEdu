@@ -14,11 +14,11 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   #mysql数据库连接
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/guli_db?serverTimezone=GMT%2B8
-    username: root
-    password: wcd0209
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/guli_db?serverTimezone=GMT%2B8
+#    username: root
+#    password: wcd0209
 
   #redis
   redis:
