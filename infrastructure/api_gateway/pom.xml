@@ -38,6 +38,13 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+
+        <!--服务配置-->
+        <!--nacos-config-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -45,7 +52,7 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**/*.xml</include>
+                    <include>**/*.yaml</include>
                 </includes>
             </resource>
         </resources>

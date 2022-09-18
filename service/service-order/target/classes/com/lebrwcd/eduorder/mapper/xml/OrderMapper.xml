@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lebrwcd.eduorder.mapper.OrderMapper">
 
+    <resultMap id="result" type="com.lebrwcd.eduorder.model.vo.QueryVO">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="nickname" property="nickname"/>
+        <result column="course_title" property="courseTitle" />
+        <result column="total_fee" property="totalFee" />
+        <result column="pay_type" property="payType" />
+        <result column="status" property="status" />
+        <result column="gmt_create" property="gmtCreate" />
+        <result column="gmt_modified" property="gmtModified" />
+    </resultMap>
+
+    <select id="pageQuery" resultMap="result">
+        select id,order_no,nickname,course_title,total_fee,pay_type,status,gmt_create,gmt_modified
+        from t_order
+        where 1=1
+        <if test="map.orderNo !=null and map.orderNo != ''">
+            and order_no like '%' #{map.orderNo} '%'
+        </if>
+        <if test="map.status !=null">
+            and status = #{map.status}
+        </if>
+        <if test="map.gmtCreate !=null">
+            and gmt_create = #{map.gmtCreate}
+        </if>
+        <if test="map.gmtModified !=null">
+            and gmt_modified = #{map.gmtModified}
+        </if>
+        order by gmt_create desc
+        limit #{num},#{size}
+    </select>
 </mapper>

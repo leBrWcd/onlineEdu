@@ -96,11 +96,18 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         //从分页对象中取出查询出来的数据
         long total = coursePage.getTotal();
         List<EduCourse> records = coursePage.getRecords();
+        records.forEach( e -> {
+            // 根据课程id获得对应课程的评论数量
+            Long comment = baseMapper.getCommentById(e.getId());
+            e.setComment(comment);
+        });
         long pages = coursePage.getPages();
         long current = coursePage.getCurrent();
         long size = coursePage.getSize();
         boolean hasNext = coursePage.hasNext();
         boolean hasPrevious = coursePage.hasPrevious();
+
+        // 查询课程评论数量
 
         Map<String,Object> dataMap = new HashMap<>();
 

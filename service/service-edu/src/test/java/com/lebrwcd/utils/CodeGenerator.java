@@ -53,10 +53,10 @@ public class CodeGenerator {
         ///2、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setDbType(DbType.MYSQL);   //设置数据库类型
-        dsc.setUrl("jdbc:mysql://localhost:3306/guli_db?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");  //指定数据库
+        dsc.setUrl("jdbc:mysql://192.168.110.135/online_edu?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8");  //指定数据库
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
         dsc.setUsername("root");
-        dsc.setPassword("wcd0209");
+        dsc.setPassword("root");
         autoGenerator.setDataSource(dsc);
 
 
@@ -73,7 +73,7 @@ public class CodeGenerator {
 
         // 4、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_comment"); // 设置要映射的表名
+        strategy.setInclude("edu_course_collect"); // 设置要映射的表名
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
         strategy.setEntityLombokModel(true); // 自动lombok；

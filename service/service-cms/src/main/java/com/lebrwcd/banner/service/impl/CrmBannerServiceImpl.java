@@ -31,9 +31,10 @@ public class CrmBannerServiceImpl extends ServiceImpl<CrmBannerMapper, CrmBanner
 
         QueryWrapper<CrmBanner> wrapper = new QueryWrapper<>();
         //根据id降序排列
-        wrapper.orderByDesc("id");
+        wrapper.orderByAsc("sort");
         //取出前两条数据
         wrapper.last("limit 4");
+        wrapper.eq("is_deleted",0);
 
         List<CrmBanner> list = baseMapper.selectList(wrapper);
 

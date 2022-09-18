@@ -52,5 +52,12 @@
             ec.id=#{courseId}
 
     </select>
+    <select id="getCommentById" resultType="java.lang.Long">
+        select count(1)
+        from edu_course ec
+        left join edu_comment em
+        on em.course_id = ec.id
+        where ec.id = #{courseId}
+    </select>
 
 </mapper>

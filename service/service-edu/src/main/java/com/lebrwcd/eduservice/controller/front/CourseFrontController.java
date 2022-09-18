@@ -4,15 +4,18 @@ package com.lebrwcd.eduservice.controller.front;/**
  * @note
  */
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lebrwcd.commonutils.JwtUtils;
 import com.lebrwcd.commonutils.R;
 import com.lebrwcd.eduservice.client.OrderClient;
 import com.lebrwcd.eduservice.entity.EduCourse;
+import com.lebrwcd.eduservice.entity.EduCourseCollect;
 import com.lebrwcd.eduservice.entity.course.Chapter;
 import com.lebrwcd.eduservice.entity.frontvo.CourseFrontVo;
 import com.lebrwcd.eduservice.entity.frontvo.CourseWebVo;
 import com.lebrwcd.eduservice.service.EduChapterService;
+import com.lebrwcd.eduservice.service.EduCourseCollectService;
 import com.lebrwcd.eduservice.service.EduCourseService;
 import com.lebrwcd.eduservice.service.EduVideoService;
 import com.lebrwcd.serviceBase.exceptionhandler.GuliException;
@@ -44,6 +47,9 @@ public class CourseFrontController {
 
     @Autowired
     private OrderClient orderClient;
+
+    @Autowired
+    private EduCourseCollectService collectService;
 
     //分页查询带条件获取课程列表
     @PostMapping("courseList/{pageSize}/{limit}")
@@ -80,5 +86,23 @@ public class CourseFrontController {
         return R.ok().data("isbuyCourse",isbuyCourse).data("courseWebVo",courseWebVo).data("chapterList",chapterList);
 
 
+    }
+
+    @PostMapping("collect/{id}")
+    public R collectCourse(@PathVariable("id") String courseId,HttpServletRequest request) {
+        String memberId = JwtUtils.getMemberIdByJwtToken(request);
+        LambdaQueryWrapper<EduCourseCollect> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(EduCourseCollect::getCourseId,courseId)
+                .eq(EduCourseCollect::getMemberId,memberId);
+        EduCourseCollect one = collectService.getOne(wrapper);
+        if (one != null) {
+            return R.error().message("该课程已收藏");
+        }
+        EduCourseCollect eduCourseCollect = new EduCourseCollect();
+        eduCourseCollect.setCourseId(courseId);
+        eduCourseCollect.setMemberId(memberId);
+        eduCourseCollect.setIsDeleted(0);
+        collectService.save(eduCourseCollect);
+        return R.ok();
     }
 }

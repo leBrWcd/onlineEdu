@@ -65,6 +65,9 @@ public class EduCourse implements Serializable {
     @Version
     private Long version;
 
+    @ApiModelProperty(value = "评论数量")
+    private Long comment;
+
     @ApiModelProperty(value = "课程状态 Draft未发布  Normal已发布")
     private String status;
 
