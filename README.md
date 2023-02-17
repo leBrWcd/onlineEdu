@@ -4,7 +4,8 @@
 本项目采用B2C模式
 ### 1.2.2、B2C模式（Business To Customer 会员模式）
     商家到用户，这种模式是自己制作大量自有版权的视频，放在自有平台上，让用户按月付费或者按年付费。这种模式简单，快速，只要专心录制大量视频即可快速发展，其曾因为 lynda 的天价融资而大热。但在中国由于版权保护意识不强，教育内容易于复制，有海量的免费资源的竞争对手众多等原因，难以取得像样的现金流。
-    ![image](https://user-images.githubusercontent.com/83166781/219648702-527e5060-82cf-4cfd-b974-caeaae59249a.png)
+
+![image](https://user-images.githubusercontent.com/83166781/219648702-527e5060-82cf-4cfd-b974-caeaae59249a.png)
 ### 主要功能与技术实现
 ![image](https://user-images.githubusercontent.com/83166781/219648784-201b0fd2-39f6-4246-87e9-d4254ede1566.png)
 ![image](https://user-images.githubusercontent.com/83166781/219648840-2b00e802-07fb-4270-9662-f728db8c304a.png)
